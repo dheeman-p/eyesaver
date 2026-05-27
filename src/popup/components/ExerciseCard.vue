@@ -44,6 +44,171 @@ const EXERCISE_ICONS: Record<number, string> = {
 
 const FALLBACK_ICON = `<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
   <path d="M2 12 C5 7 19 7 22 12 C19 17 5 17 2 12Z" stroke="currentColor" stroke-width="1.5" fill="none"/>`;
+
+// Animated SVG illustrations — inner markup injected via v-html into a 200×115 viewBox SVG.
+// All animations use SMIL (animate / animateTransform / animateMotion) so they are self-contained
+// and unaffected by Vue's scoped-style attribute. Eye centre: (100, 52).
+const EXERCISE_ANIMATIONS: Record<number, string> = {
+  // 20-20-20 Rule: iris shifts right (looking far away) then returns
+  0: `<path d="M15 52 C55 20 145 20 185 52 C145 84 55 84 15 52Z" fill="#e0f2f1" stroke="#00897b" stroke-width="2.5"/>
+<g>
+  <animateTransform attributeName="transform" type="translate"
+    values="0,0; 0,0; 22,0; 22,0; 0,0"
+    keyTimes="0; 0.15; 0.42; 0.72; 1"
+    dur="3.5s" repeatCount="indefinite"
+    calcMode="spline"
+    keySplines="0 0 0 0; 0.42 0 0.58 1; 0 0 0 0; 0.42 0 0.58 1"/>
+  <circle cx="100" cy="52" r="20" fill="#4db6ac" stroke="#00697b" stroke-width="1.5"/>
+  <circle cx="100" cy="52" r="10" fill="#0d1b2a"/>
+  <circle cx="106" cy="46" r="3" fill="white" opacity="0.75"/>
+</g>
+<g>
+  <animate attributeName="opacity" values="1; 1; 0.15; 0.15; 1" keyTimes="0; 0.15; 0.42; 0.72; 1" dur="3.5s" repeatCount="indefinite"/>
+  <rect x="10" y="88" width="22" height="14" rx="2" fill="none" stroke="#546e7a" stroke-width="1.5"/>
+  <line x1="16" y1="102" x2="26" y2="107" stroke="#546e7a" stroke-width="1.5"/>
+  <rect x="14" y="107" width="14" height="2" rx="0.5" fill="#546e7a"/>
+</g>
+<g>
+  <animate attributeName="opacity" values="0.15; 0.15; 1; 1; 0.15" keyTimes="0; 0.15; 0.42; 0.72; 1" dur="3.5s" repeatCount="indefinite"/>
+  <line x1="158" y1="108" x2="195" y2="108" stroke="#546e7a" stroke-width="1.5" stroke-linecap="round"/>
+  <polyline points="160,108 172,90 184,108" fill="none" stroke="#546e7a" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+</g>`,
+
+  // Palming: eyelid closes, warm palms descend to cover
+  1: `<path d="M15 52 C55 84 145 84 185 52Z" fill="#e0f2f1" stroke="#00897b" stroke-width="2.5"/>
+<path fill="#f5f5f5" stroke="#00897b" stroke-width="2.5">
+  <animate attributeName="d"
+    values="M15 52 C55 20 145 20 185 52;M15 52 C55 20 145 20 185 52;M15 52 C55 51 145 51 185 52;M15 52 C55 51 145 51 185 52;M15 52 C55 20 145 20 185 52"
+    keyTimes="0; 0.12; 0.38; 0.70; 1"
+    dur="4s" repeatCount="indefinite"
+    calcMode="spline"
+    keySplines="0 0 0 0; 0.42 0 0.58 1; 0 0 0 0; 0.42 0 0.58 1"/>
+</path>
+<circle cx="100" cy="52" r="20" fill="#4db6ac" stroke="#00697b" stroke-width="1.5">
+  <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.12;0.38;0.70;1" dur="4s" repeatCount="indefinite"/>
+</circle>
+<circle cx="100" cy="52" r="10" fill="#0d1b2a">
+  <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.12;0.38;0.70;1" dur="4s" repeatCount="indefinite"/>
+</circle>
+<circle cx="106" cy="46" r="3" fill="white" opacity="0.75">
+  <animate attributeName="opacity" values="0.75;0.75;0;0;0.75" keyTimes="0;0.12;0.38;0.70;1" dur="4s" repeatCount="indefinite"/>
+</circle>
+<g>
+  <animateTransform attributeName="transform" type="translate"
+    values="0,-85; 0,-85; 0,0; 0,0; 0,-85"
+    keyTimes="0; 0.08; 0.35; 0.70; 1"
+    dur="4s" repeatCount="indefinite"
+    calcMode="spline"
+    keySplines="0 0 0 0; 0.42 0 0.58 1; 0 0 0 0; 0.42 0 0.58 1"/>
+  <ellipse cx="60" cy="45" rx="40" ry="22" fill="#ffccbc" stroke="#a1887f" stroke-width="1.5"/>
+  <path d="M30 34 Q36 24 44 32 Q50 22 58 30 Q64 22 72 30 Q78 24 85 34" fill="none" stroke="#a1887f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g>
+  <animateTransform attributeName="transform" type="translate"
+    values="0,-85; 0,-85; 0,0; 0,0; 0,-85"
+    keyTimes="0; 0.08; 0.35; 0.70; 1"
+    dur="4s" repeatCount="indefinite"
+    calcMode="spline"
+    keySplines="0 0 0 0; 0.42 0 0.58 1; 0 0 0 0; 0.42 0 0.58 1"/>
+  <ellipse cx="140" cy="45" rx="40" ry="22" fill="#ffccbc" stroke="#a1887f" stroke-width="1.5"/>
+  <path d="M115 34 Q121 24 129 32 Q135 22 143 30 Q149 22 157 30 Q163 24 170 34" fill="none" stroke="#a1887f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>`,
+
+  // Conscious Blinking: 3 slow deliberate blinks over 7s
+  2: `<path d="M15 52 C55 84 145 84 185 52Z" fill="#e0f2f1" stroke="#00897b" stroke-width="2.5"/>
+<path fill="#f5f5f5" stroke="#00897b" stroke-width="2.5">
+  <animate attributeName="d"
+    values="M15 52 C55 20 145 20 185 52;M15 52 C55 20 145 20 185 52;M15 52 C55 51 145 51 185 52;M15 52 C55 20 145 20 185 52;M15 52 C55 20 145 20 185 52;M15 52 C55 51 145 51 185 52;M15 52 C55 20 145 20 185 52;M15 52 C55 20 145 20 185 52;M15 52 C55 51 145 51 185 52;M15 52 C55 20 145 20 185 52;M15 52 C55 20 145 20 185 52"
+    keyTimes="0;0.10;0.157;0.20;0.30;0.357;0.40;0.50;0.557;0.60;1"
+    dur="7s" repeatCount="indefinite"
+    calcMode="spline"
+    keySplines="0 0 0 0;0.42 0 0.58 1;0.42 0 0.58 1;0 0 0 0;0.42 0 0.58 1;0.42 0 0.58 1;0 0 0 0;0.42 0 0.58 1;0.42 0 0.58 1;0 0 0 0"/>
+</path>
+<circle cx="100" cy="52" r="20" fill="#4db6ac" stroke="#00697b" stroke-width="1.5">
+  <animate attributeName="opacity" values="1;1;0;1;1;0;1;1;0;1;1"
+    keyTimes="0;0.10;0.157;0.20;0.30;0.357;0.40;0.50;0.557;0.60;1" dur="7s" repeatCount="indefinite"/>
+</circle>
+<circle cx="100" cy="52" r="10" fill="#0d1b2a">
+  <animate attributeName="opacity" values="1;1;0;1;1;0;1;1;0;1;1"
+    keyTimes="0;0.10;0.157;0.20;0.30;0.357;0.40;0.50;0.557;0.60;1" dur="7s" repeatCount="indefinite"/>
+</circle>
+<circle cx="106" cy="46" r="3" fill="white" opacity="0.75">
+  <animate attributeName="opacity" values="0.75;0.75;0;0.75;0.75;0;0.75;0.75;0;0.75;0.75"
+    keyTimes="0;0.10;0.157;0.20;0.30;0.357;0.40;0.50;0.557;0.60;1" dur="7s" repeatCount="indefinite"/>
+</circle>`,
+
+  // Figure-Eight Tracking: iris traces horizontal ∞ path continuously
+  3: `<path d="M15 52 C55 20 145 20 185 52 C145 84 55 84 15 52Z" fill="#e0f2f1" stroke="#00897b" stroke-width="2.5"/>
+<path d="M125 52 C125 38 100 38 100 52 C100 38 75 38 75 52 C75 66 100 66 100 52 C100 66 125 66 125 52"
+      fill="none" stroke="#80cbc4" stroke-width="1.2" stroke-dasharray="3,4" opacity="0.65"/>
+<g>
+  <animateMotion dur="4s" repeatCount="indefinite"
+    path="M 25,0 C 25,-14 0,-14 0,0 C 0,-14 -25,-14 -25,0 C -25,14 0,14 0,0 C 0,14 25,14 25,0"/>
+  <circle cx="100" cy="52" r="20" fill="#4db6ac" stroke="#00697b" stroke-width="1.5"/>
+  <circle cx="100" cy="52" r="10" fill="#0d1b2a"/>
+  <circle cx="106" cy="46" r="3" fill="white" opacity="0.75"/>
+</g>`,
+
+  // Near-Far Focus Shift: gaze alternates near (lower-left) and far (upper-right)
+  4: `<path d="M15 52 C55 20 145 20 185 52 C145 84 55 84 15 52Z" fill="#e0f2f1" stroke="#00897b" stroke-width="2.5"/>
+<g>
+  <animateTransform attributeName="transform" type="translate"
+    values="-12,6; -12,6; 12,-6; 12,-6; -12,6"
+    keyTimes="0; 0.28; 0.52; 0.78; 1"
+    dur="4s" repeatCount="indefinite"
+    calcMode="spline"
+    keySplines="0 0 0 0; 0.42 0 0.58 1; 0 0 0 0; 0.42 0 0.58 1"/>
+  <circle cx="100" cy="52" r="20" fill="#4db6ac" stroke="#00697b" stroke-width="1.5"/>
+  <circle cx="100" cy="52" r="10" fill="#0d1b2a"/>
+  <circle cx="106" cy="46" r="3" fill="white" opacity="0.75"/>
+</g>
+<g>
+  <animate attributeName="opacity" values="1;1;0.15;0.15;1" keyTimes="0;0.28;0.52;0.78;1" dur="4s" repeatCount="indefinite"/>
+  <ellipse cx="26" cy="96" rx="10" ry="13" fill="#ffccbc" stroke="#a1887f" stroke-width="1.5"/>
+  <path d="M20 86 Q26 80 32 86" fill="none" stroke="#a1887f" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+<g>
+  <animate attributeName="opacity" values="0.15;0.15;1;1;0.15" keyTimes="0;0.28;0.52;0.78;1" dur="4s" repeatCount="indefinite"/>
+  <line x1="157" y1="108" x2="194" y2="108" stroke="#546e7a" stroke-width="1.5" stroke-linecap="round"/>
+  <polyline points="159,108 171,90 183,108" fill="none" stroke="#546e7a" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+</g>`,
+
+  // Eye Rolling: iris orbits clockwise ×2 then counter-clockwise ×2
+  5: `<defs>
+  <clipPath id="ec5clip">
+    <path d="M15 52 C55 20 145 20 185 52 C145 84 55 84 15 52Z"/>
+  </clipPath>
+</defs>
+<path d="M15 52 C55 20 145 20 185 52 C145 84 55 84 15 52Z" fill="#e0f2f1" stroke="#00897b" stroke-width="2.5"/>
+<circle cx="100" cy="52" r="20" fill="none" stroke="#b2dfdb" stroke-width="1" stroke-dasharray="3,4" opacity="0.5"/>
+<g clip-path="url(#ec5clip)">
+  <g>
+    <animateTransform attributeName="transform" type="rotate"
+      values="0 100 52; 720 100 52; 720 100 52; 0 100 52; 0 100 52"
+      keyTimes="0; 0.42; 0.50; 0.92; 1"
+      dur="8s" repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.4 0 0.6 1; 0 0 0 0; 0.4 0 0.6 1; 0 0 0 0"/>
+    <circle cx="120" cy="52" r="20" fill="#4db6ac" stroke="#00697b" stroke-width="1.5"/>
+    <circle cx="120" cy="52" r="10" fill="#0d1b2a"/>
+    <circle cx="126" cy="46" r="3" fill="white" opacity="0.75"/>
+  </g>
+</g>`,
+};
+
+const FALLBACK_ANIMATION = `<path d="M15 52 C55 84 145 84 185 52Z" fill="#e0f2f1" stroke="#00897b" stroke-width="2.5"/>
+<path fill="#f5f5f5" stroke="#00897b" stroke-width="2.5">
+  <animate attributeName="d"
+    values="M15 52 C55 20 145 20 185 52;M15 52 C55 51 145 51 185 52;M15 52 C55 20 145 20 185 52"
+    keyTimes="0;0.2;0.5" dur="3s" repeatCount="indefinite" calcMode="spline"
+    keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"/>
+</path>
+<circle cx="100" cy="52" r="20" fill="#4db6ac" stroke="#00697b" stroke-width="1.5">
+  <animate attributeName="opacity" values="1;0;1" keyTimes="0;0.2;0.5" dur="3s" repeatCount="indefinite"/>
+</circle>
+<circle cx="100" cy="52" r="10" fill="#0d1b2a">
+  <animate attributeName="opacity" values="1;0;1" keyTimes="0;0.2;0.5" dur="3s" repeatCount="indefinite"/>
+</circle>`;
 </script>
 
 <template>
@@ -64,6 +229,15 @@ const FALLBACK_ICON = `<circle cx="12" cy="12" r="4" stroke="currentColor" strok
     </v-card-text>
 
     <div class="exercise-card__tagline">{{ exercise.description }}</div>
+
+    <div class="exercise-card__animation" aria-hidden="true">
+      <svg
+        viewBox="0 0 200 115"
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        v-html="EXERCISE_ANIMATIONS[exercise.index] ?? FALLBACK_ANIMATION"
+      />
+    </div>
 
     <v-divider class="exercise-card__divider" />
 
@@ -140,6 +314,19 @@ const FALLBACK_ICON = `<circle cx="12" cy="12" r="4" stroke="currentColor" strok
   font-size: v.$font-label;
   color: rgba(0, 0, 0, 0.55);
   line-height: 1.35;
+}
+
+.exercise-card__animation {
+  padding: 0 v.$space-3 v.$space-2;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 110px;
+    border-radius: v.$radius-sm;
+    background: rgba(0, 137, 123, 0.04);
+    border: 1px solid rgba(0, 137, 123, 0.12);
+  }
 }
 
 .exercise-card__divider {
