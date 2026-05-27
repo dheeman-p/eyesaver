@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "useDefineForClassFields": true,
+    "jsx": "preserve",
+    "types": ["chrome", "vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["src/shared/*"],
+      "@popup/*": ["src/popup/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue"]
+}
