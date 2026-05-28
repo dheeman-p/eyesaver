@@ -9,3 +9,7 @@ Thumbs.db
 *.swp
 .idea/
 coverage/
+.claudeignore
+.claude/
+.specify/
+.specs/
