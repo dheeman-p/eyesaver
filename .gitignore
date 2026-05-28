@@ -10,6 +10,6 @@ Thumbs.db
 .idea/
 coverage/
 .claudeignore
-.claude/
-.specify/
-.specs/
+.claude/**
+.specify/**
+.specs/**
