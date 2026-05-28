@@ -49,11 +49,11 @@ const FALLBACK_ICON = `<circle cx="12" cy="12" r="4" stroke="currentColor" strok
 // All animations use SMIL (animate / animateTransform / animateMotion) so they are self-contained
 // and unaffected by Vue's scoped-style attribute. Eye centre: (100, 52).
 const EXERCISE_ANIMATIONS: Record<number, string> = {
-  // 20-20-20 Rule: iris shifts right (looking far away) then returns
+  // 20-20-20 Rule: iris shifts from left (screen) to right (far away) then returns
   0: `<path d="M15 52 C55 20 145 20 185 52 C145 84 55 84 15 52Z" fill="#e0f2f1" stroke="#00897b" stroke-width="2.5"/>
 <g>
   <animateTransform attributeName="transform" type="translate"
-    values="0,0; 0,0; 22,0; 22,0; 0,0"
+    values="-18,0; -18,0; 22,0; 22,0; -18,0"
     keyTimes="0; 0.15; 0.42; 0.72; 1"
     dur="3.5s" repeatCount="indefinite"
     calcMode="spline"
@@ -322,7 +322,9 @@ const FALLBACK_ANIMATION = `<path d="M15 52 C55 84 145 84 185 52Z" fill="#e0f2f1
   svg {
     display: block;
     width: 100%;
-    height: 110px;
+    height: auto;
+    min-height: 110px;
+    max-height: 180px;
     border-radius: v.$radius-sm;
     background: rgba(0, 137, 123, 0.04);
     border: 1px solid rgba(0, 137, 123, 0.12);

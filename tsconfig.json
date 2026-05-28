@@ -18,7 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "@shared/*": ["src/shared/*"],
-      "@popup/*": ["src/popup/*"]
+      "@popup/*": ["src/popup/*"],
+      "@pwa/*": ["src/pwa/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.vue"]
