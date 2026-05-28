@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { mdiCog } from '@mdi/js';
-import ExerciseCard from './components/ExerciseCard.vue';
-import CountdownTimer from './components/CountdownTimer.vue';
-import SettingsPanel from './components/SettingsPanel.vue';
+import ExerciseCard from '@shared/components/ExerciseCard.vue';
+import CountdownTimer from '@shared/components/CountdownTimer.vue';
+import SettingsPanel from '@shared/components/SettingsPanel.vue';
 import { useExerciseStore } from './stores/exerciseStore';
 import { useScheduleStore } from './stores/scheduleStore';
 import {
