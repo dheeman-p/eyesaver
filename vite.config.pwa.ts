@@ -5,6 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
+  base: '/eyesaver/',
   resolve: {
     alias: {
       '@shared': fileURLToPath(new URL('./src/shared', import.meta.url)),
@@ -27,15 +28,16 @@ export default defineConfig({
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#00897B',
-        start_url: '/',
+        start_url: '/eyesaver/',
+        scope: '/eyesaver/',
         icons: [
           {
-            src: '/icons/icon-192.png',
+            src: '/eyesaver/icons/icon-192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/icons/icon-512.png',
+            src: '/eyesaver/icons/icon-512.png',
             sizes: '512x512',
             type: 'image/png',
           },
