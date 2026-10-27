@@ -1,3 +1,5 @@
+@use '../../shared/styles/theme';
+
 // PWA global reset. Keep this separate from the popup stylesheet because the
 // extension popup intentionally fixes the body width to 380px.
 *,
@@ -31,6 +33,7 @@ body {
 
 body {
   min-height: 100vh;
-  background: #fafafa;
+  background: var(--es-bg);
+  color: var(--es-text);
   overflow-x: hidden;
 }

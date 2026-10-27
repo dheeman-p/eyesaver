@@ -109,7 +109,7 @@ const idleView = computed(() => !showSettings.value);
 .popup-title {
   font-size: v.$font-title;
   font-weight: 600;
-  color: v.$brand-primary;
+  color: var(--es-primary);
 }
 
 .permission-alert {

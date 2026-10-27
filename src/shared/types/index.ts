@@ -42,3 +42,9 @@ export interface StorageSchema {
   eyesaver_settings: UserSettings;
   eyesaver_state: ReminderState;
 }
+
+/** User's theme choice; 'system' follows the OS prefers-color-scheme. */
+export type ThemePreference = 'system' | 'light' | 'dark';
+
+/** The theme actually applied to the page. */
+export type ResolvedTheme = 'light' | 'dark';

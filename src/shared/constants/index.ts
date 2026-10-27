@@ -7,6 +7,9 @@ export const NOTIFICATION_ID = 'eyesaver-active' as const;
 export const STORAGE_KEY_SETTINGS = 'eyesaver_settings' as const;
 export const STORAGE_KEY_STATE = 'eyesaver_state' as const;
 
+/** localStorage key for the user's theme preference (popup and PWA each use their own origin). */
+export const THEME_STORAGE_KEY = 'eyesaver-theme' as const;
+
 export const DEFAULT_SETTINGS: UserSettings = {
   intervalMinutes: 20,
   snoozeDurationMinutes: 5,

@@ -123,15 +123,24 @@ src/
 ├── shared/
 │   ├── constants/index.ts
 │   ├── types/index.ts
+│   ├── theme/                  (light/dark theme logic)
+│   ├── styles/_theme.scss      (colour palettes)
 │   └── exercises/index.ts
 └── manifest.json
 
 dist/                               (built output; .gitignore'd)
 ```
 
+## Theming
+
+- The light/dark palettes are defined once, as `--es-*` CSS custom properties, in `src/shared/styles/_theme.scss`. The active palette is chosen by `data-theme="light|dark"` on `<html>`; with no attribute, `prefers-color-scheme` decides.
+- Theme logic (read, write, apply) lives in `src/shared/theme/` (`useAppTheme()`); `src/shared/theme/init.ts` is imported first in each `main.ts` to apply the stored theme before first paint. `src/shared/theme/vuetifyTheme.ts` keeps Vuetify's theme in step.
+- The choice (`system` | `light` | `dark`) is stored in `localStorage` under `eyesaver-theme` (`THEME_STORAGE_KEY`); each origin (extension popup, PWA) keeps its own. The control is `src/shared/components/ThemeSwitcher.vue`, shown at the top of Settings.
+- To add a colour: add the same key to both the `$light` and `$dark` maps in `_theme.scss` (and to `vuetifyThemes` if Vuetify needs it), then use `var(--es-<key>)`. Never hard-code colours in components.
+
 ## Testing and Validation
 
-No unit or integration tests yet. Manual validation:
+Unit tests (`npm test`, vitest + jsdom) cover the theme logic and `CountdownTimer`. Manual validation:
 1. Install extension locally: `npm run build`, then load `dist/` in Chrome DevTools
 2. Open popup, toggle enable, adjust sliders — verify `chrome.storage.local` updates
 3. Wait for (or manually trigger) alarm via Chrome DevTools > Alarms tab

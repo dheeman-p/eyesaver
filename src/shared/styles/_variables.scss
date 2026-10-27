@@ -1,10 +1,7 @@
 // Design tokens for EyeSaver popup
 // Used by all components via @use 'styles/variables' as v;
 
-// Brand colour: teal evoking eye health and calm
-$brand-primary: #00897b;
-$brand-primary-darken: #00695c;
-$brand-on-primary: #ffffff;
+// Colours live in styles/_theme.scss as --es-* custom properties.
 
 // Spacing scale (4 px base unit)
 $space-1: 4px;

@@ -1,3 +1,4 @@
+@use '../../shared/styles/theme';
 @use './variables' as v;
 
 // Global reset
@@ -25,7 +26,8 @@ body {
 body {
   width: v.$popup-width;
   min-height: 320px;
-  background: #fafafa;
+  background: var(--es-bg);
+  color: var(--es-text);
 }
 
 #app {
