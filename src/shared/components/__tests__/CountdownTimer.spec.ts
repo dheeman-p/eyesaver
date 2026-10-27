@@ -1,12 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { nextTick, reactive } from 'vue';
 import { mount } from '@vue/test-utils';
 import { setActivePinia, createPinia } from 'pinia';
 import CountdownTimer from '@shared/components/CountdownTimer.vue';
 
-const mockStore = {
+const mockStore = reactive({
   secondsRemaining: 0,
   progressPercent: 0,
-};
+});
 
 vi.mock('@popup/stores/scheduleStore', () => ({
   useScheduleStore: () => mockStore,
@@ -65,11 +66,43 @@ describe('CountdownTimer', () => {
     });
   });
 
+  describe('reactivity', () => {
+    it('updates the label when the store changes', async () => {
+      mockStore.secondsRemaining = 90;
+      const wrapper = mountTimer();
+      expect(wrapper.find('.countdown__label').text()).toBe('Next reminder in 1m 30s');
+
+      mockStore.secondsRemaining = 0;
+      await nextTick();
+      expect(wrapper.find('.countdown__label').text()).toBe('Reminder due now');
+    });
+
+    it('updates the progress bar when the store changes', async () => {
+      const wrapper = mountTimer();
+      mockStore.progressPercent = 40;
+      await nextTick();
+      expect(wrapper.find('v-progress-linear-stub').attributes('model-value')).toBe('40');
+    });
+
+    it('formats 3599s as "59m 59s"', () => {
+      mockStore.secondsRemaining = 3599;
+      const wrapper = mountTimer();
+      expect(wrapper.find('.countdown__label').text()).toBe('Next reminder in 59m 59s');
+    });
+  });
+
   describe('progress bar', () => {
     it('passes progressPercent to the progress bar', () => {
       mockStore.progressPercent = 75;
       const wrapper = mountTimer();
       expect(wrapper.find('v-progress-linear-stub').attributes('model-value')).toBe('75');
+    });
+
+    it('passes color and height through to the progress bar', () => {
+      const wrapper = mountTimer();
+      const bar = wrapper.find('v-progress-linear-stub');
+      expect(bar.attributes('color')).toBe('primary');
+      expect(bar.attributes('height')).toBe('6');
     });
 
     it('passes 0 progress when no time has elapsed', () => {
