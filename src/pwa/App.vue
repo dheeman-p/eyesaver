@@ -2,6 +2,7 @@
 import { computed, onMounted, ref, onUnmounted, watch } from 'vue';
 import { useRegisterSW } from 'virtual:pwa-register/vue';
 import ExerciseCard from '@shared/components/ExerciseCard.vue';
+import ThemeSwitcher from '@shared/components/ThemeSwitcher.vue';
 import NotificationPermissionBanner from '@pwa/components/NotificationPermissionBanner.vue';
 import BackgroundSyncNotice from '@pwa/components/BackgroundSyncNotice.vue';
 import { usePwaSettingsStore } from '@pwa/stores/settingsStore';
@@ -344,7 +345,7 @@ onUnmounted(() => {
         <span class="pwa-progress__label">{{ nextReminderLabel }}</span>
         <v-progress-linear
           :model-value="progressPercent"
-          color="teal"
+          color="primary"
           height="8"
           rounded
         />
@@ -356,6 +357,7 @@ onUnmounted(() => {
           <v-card class="settings-panel" elevation="1">
             <v-card-title class="settings-panel__title">Settings</v-card-title>
             <v-card-text class="settings-panel__body">
+              <ThemeSwitcher />
               <v-text-field
                 v-model.number="localInterval"
                 type="number"
@@ -425,7 +427,7 @@ onUnmounted(() => {
 .pwa-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #00897b;
+  color: var(--es-primary);
 }
 
 .pwa-body {
@@ -444,7 +446,7 @@ onUnmounted(() => {
 .pwa-progress__label {
   font-size: 13px;
   font-weight: 500;
-  color: #00897b;
+  color: var(--es-primary);
 }
 
 .pwa-update-banner__content {
@@ -457,7 +459,7 @@ onUnmounted(() => {
 .settings-panel__title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #00897b;
+  color: var(--es-primary);
   padding: 12px 12px 8px;
 }
 

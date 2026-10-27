@@ -7,6 +7,7 @@ import {
   SNOOZE_MAX_MINUTES,
   SNOOZE_MIN_MINUTES,
 } from '@shared/constants';
+import ThemeSwitcher from '@shared/components/ThemeSwitcher.vue';
 
 const emit = defineEmits<{ close: [] }>();
 
@@ -72,6 +73,7 @@ async function onSave(): Promise<void> {
   <v-card class="settings-panel" elevation="1">
     <v-card-title class="settings-panel__title">Settings</v-card-title>
     <v-card-text class="settings-panel__body">
+      <ThemeSwitcher />
       <v-text-field
         v-model.number="intervalInput"
         type="number"
@@ -117,7 +119,7 @@ async function onSave(): Promise<void> {
 .settings-panel__title {
   font-size: v.$font-title;
   font-weight: 600;
-  color: v.$brand-primary;
+  color: var(--es-primary);
   padding: v.$space-3 v.$space-3 v.$space-2;
 }
 

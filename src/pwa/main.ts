@@ -1,3 +1,4 @@
+import '@shared/theme/init';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { createVuetify } from 'vuetify';
@@ -16,6 +17,8 @@ import {
   VSwitch,
   VTextField,
 } from 'vuetify/components';
+import { useAppTheme } from '@shared/theme';
+import { bindVuetifyTheme, vuetifyThemes } from '@shared/theme/vuetifyTheme';
 import App from './App.vue';
 import 'vuetify/styles';
 import './styles/main.scss';
@@ -38,14 +41,11 @@ const vuetify = createVuetify({
   directives: { Ripple },
   theme: {
     defaultTheme: 'light',
-    themes: {
-      light: {
-        colors: {
-          primary: '#00897B',
-        },
-      },
-    },
+    themes: vuetifyThemes,
   },
 });
+
+useAppTheme().initTheme();
+bindVuetifyTheme(vuetify);
 
 createApp(App).use(createPinia()).use(vuetify).mount('#app');

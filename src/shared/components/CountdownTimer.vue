@@ -47,6 +47,6 @@ const label = computed(() => {
 
 .countdown__label {
   font-size: v.$font-label;
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--es-text-secondary);
 }
 </style>

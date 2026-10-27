@@ -1,0 +1,81 @@
+// Single source of truth for the EyeSaver colour palettes.
+//
+// Every colour used by shared components, the popup and the PWA must come from
+// one of these `--es-*` custom properties. The active palette is selected by
+// the `data-theme="light|dark"` attribute on <html>, which is set by
+// `src/shared/theme`. When no attribute is present yet (before JS runs) the OS
+// `prefers-color-scheme` decides, so the default is always "System".
+//
+// To add a colour: add the same key to BOTH maps below, then use
+// `var(--es-<key>)`. Contrast targets: WCAG AA (4.5:1) for text.
+$light: (
+  'bg': #fafafa,
+  'surface': #ffffff,
+  'text': #1f2933,
+  'text-secondary': #52606d,
+  'border': #d9e0e6,
+  'primary': #00796b,
+  'on-primary': #ffffff,
+  'primary-tint': rgba(0, 121, 107, 0.04),
+  'primary-tint-strong': rgba(0, 121, 107, 0.12),
+  'eye-sclera': #e0f2f1,
+  'eye-lid': #f5f5f5,
+  'eye-outline': #00796b,
+  'eye-iris': #4db6ac,
+  'eye-iris-stroke': #00695c,
+  'eye-pupil': #0d1b2a,
+  'eye-glint': #ffffff,
+  'eye-prop': #546e7a,
+  'eye-skin': #ffccbc,
+  'eye-skin-stroke': #a1887f,
+  'eye-trace': #4f9d94,
+  'eye-ring': #80b8b1,
+);
+
+$dark: (
+  'bg': #121816,
+  'surface': #1c2421,
+  'text': #e6edf3,
+  'text-secondary': #aab4bf,
+  'border': #34413d,
+  'primary': #4db6ac,
+  'on-primary': #0b1f1c,
+  'primary-tint': rgba(77, 182, 172, 0.06),
+  'primary-tint-strong': rgba(77, 182, 172, 0.18),
+  'eye-sclera': #25403c,
+  'eye-lid': #33403d,
+  'eye-outline': #4db6ac,
+  'eye-iris': #3a9d94,
+  'eye-iris-stroke': #80cbc4,
+  'eye-pupil': #0d1b2a,
+  'eye-glint': #ffffff,
+  'eye-prop': #90a4ae,
+  'eye-skin': #8d6e63,
+  'eye-skin-stroke': #d7ccc8,
+  'eye-trace': #5fa8a0,
+  'eye-ring': #4a7f79,
+);
+
+@mixin theme-vars($map) {
+  @each $name, $value in $map {
+    --es-#{$name}: #{$value};
+  }
+}
+
+:root,
+:root[data-theme='light'] {
+  @include theme-vars($light);
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  @include theme-vars($dark);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    @include theme-vars($dark);
+    color-scheme: dark;
+  }
+}
