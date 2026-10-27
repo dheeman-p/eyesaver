@@ -8,6 +8,7 @@ export default defineConfig({
     alias: {
       '@shared': fileURLToPath(new URL('./src/shared', import.meta.url)),
       '@popup': fileURLToPath(new URL('./src/popup', import.meta.url)),
+      '@pwa': fileURLToPath(new URL('./src/pwa', import.meta.url)),
     },
   },
   test: {
